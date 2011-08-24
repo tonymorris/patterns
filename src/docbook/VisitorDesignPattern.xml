@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<sect1 id="VisitorDesignPattern">
+  <title>Visitor Design Pattern</title>
+  <sect2 id="VisitorDesignPattern.Definition">
+    <title>Definition<biblioref linkend="DesignPatterns.VisitorDesignPattern"/></title>
+    <sect3 id="VisitorDesignPattern.Intent">
+      <title>Intent</title>
+      <para>
+        Represent an operation to be performed on the elements of an object structure. Visitor lets you define a new
+        operation without changing the classes of the elements on which it operates.
+      </para>
+    </sect3>
+    <sect3 id="VisitorDesignPattern.Example">
+      <title>Example</title>
+      <para>
+        <itemizedlist>
+          <listitem>
+            <para>
+              The Visitor Design Pattern is Java's attempt at resolving The Expression Problem.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Suppose a data structure that is a list containing either one element or is empty <code>OneOrNone</code>.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              We could denote this with <code>null</code> or perhaps use the Visitor Design Pattern.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+    </sect3>
+  </sect2>
+  <sect2>
+    <title>Java</title>
+    <para>
+      <programlisting language="Java">
+interface OneOrNone&lt;T> {
+  &lt;A> A visit(OneOrNoneVisitor&lt;A> v);
+}
+
+class One&lt;T> implements OneOrNone&lt;T> {
+  private T t;
+  One(T t) { this.t = t; }
+  T one() { return t; }
+  public &lt;A> A visit(OneOrNoneVisitor&lt;A> v) { return v.visit(this); }        
+}
+
+class None&lt;T> implements OneOrNone&lt;T> {
+  public &lt;A> A visit(OneOrNoneVisitor&lt;A> v) { return v.visit(this); }
+}
+
+interface OneOrNoneVisitor&lt;A> {
+  &lt;T> A visit(One&lt;T> o);
+  &lt;T> A visit(None&lt;T> n);
+}
+      </programlisting>
+    </para>
+  </sect2>
+  <sect2>
+    <title>Java (still)</title>
+    <para>
+      So we use the visitor as follows:
+      <programlisting language="Java">
+class Main {
+  public static void main(String[] args) {
+    System.out.println(s(new One&lt;Integer>(7)));
+    System.out.println(s(new One&lt;String>("hello")));
+    System.out.println(s(new None&lt;Integer>()));
+  }
+
+  static &lt;X> String s(OneOrNone&lt;X> o) {
+    return o.visit(new OneOrNoneVisitor&lt;String>() {
+      public &lt;T> String visit(One&lt;T> o) { return "got one! " + o.one(); }
+      public &lt;T> String visit(None&lt;T> n) { return "don't got one"; }
+    });
+  }
+}
+      </programlisting>
+    </para>
+  </sect2>
+  <sect2>
+    <title>Scala</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            We are effectively destructuring our list (<code>OneOrNone</code>) into one of two parts
+            <itemizedlist>
+              <listitem>
+                <para>
+                  <code>One</code> in the event that a value is available.
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  <code>None</code> in the event that no value is available.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Why don't we just write it that way then? Here is the structure of our list:
+            <programlisting language="Scala">
+sealed trait OneOrNone[+A]
+final case object None extends OneOrNone[Nothing]
+final case class One[+A](a: A) extends OneOrNone[A]
+            </programlisting>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2>
+    <title>Algebraic Data Types</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Algebraic Data Types (ADTs) to the rescue.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Here is the destructuring. Note the use of <code>match</code> and <code>case</code>.
+            <programlisting language="Scala">
+object Main {
+  def main(args: Array[String]) {
+    println(s(One(7)))
+    println(s(One("hello")))
+    println(s(None))
+  }
+
+  def s[X](o: OneOrNone[X]) = o match {
+    case One(o) => "got one! " + o
+    case None => "don't got one"
+  }
+}
+            </programlisting>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2>
+    <title>Haskell</title>
+    <para>
+      <programlisting language="Haskell">
+data OneOrNone a = None | One a deriving (Show)
+s (One o) = "got one! " ++ show o
+s None = "don't got one"
+main = do print (s (One 7))
+          print (s (One "hello"))
+          print (s (None :: OneOrNone ()))
+      </programlisting>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Zing!
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            The Visitor Design Pattern is useful for alleviating deficiencies of inexpressive programming languages
+            lacking Algebraic Data Types or it is of no consequence and undeserving of recognition
+            since it reduces to a fundamental tenet of computational theory.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+</sect1>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+      <!ENTITY mdash "&#2014;">
+    ]>
+
+<sect1 id="FashionIndustry">
+  <title>Computer Programming is a Fashion Industry</title>
+  <sect2 id="SoWhat">
+    <title>So What?</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            I thought this was about Java and Design Patterns!
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Let us assume the hypothesis: Falling victim to fashion can be detrimental to your intellectual health.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Computer Programming has been shown to be isomorphic (of the same form) to proving a logical theorem<footnote>
+              <para>
+                known as the Curry-Howard Isomorphism
+              </para>
+            </footnote>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            You can be a skilled computer programmer, a fashion victim, neither, but not both.<footnote>
+              <para>
+                <blockquote>
+                  <attribution>
+                    Professor Emeritus Richard Lynn <emphasis>in an interview discussing his 2008 study published in the
+                    scientific journal Intelligence on June 24 2008</emphasis>
+                  </attribution>
+                  <para>
+                    Why should fewer academics believe in God than the general population? I believe it is simply a
+                    matter of the IQ. Academics have higher IQs than the general population. Several Gallup poll studies
+                    of the general population have shown that those with higher IQs tend not to believe in God.
+                  </para>
+                </blockquote>
+              </para>
+            </footnote>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="DesignPatternsBook">
+    <title>Design Patterns</title>
+    <para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="resources/images/design-patterns-cover.jpg" format="JPG"/>
+        </imageobject>
+      </mediaobject>
+    </para>
+  </sect2>
+  <sect2 id="RefactoringBook">
+    <title>Refactoring</title>
+    <para>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="resources/images/refactoring-cover.jpg" format="JPG"/>
+        </imageobject>
+      </mediaobject>
+    </para>
+  </sect2>
+  <sect2 id="Pervasiveness">
+    <title>Pervasive</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            I will pick on a small part of these two books but for no other reason than they are popular &mdash; not
+            because they stand out in guilt of propagating pseudo-science.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Does the trend-setting stop here?
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Certainly not, it is extremely <emphasis role="bold">pervasive</emphasis> in our industry.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Myths spread by repetition.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Even Java itself is a fashion.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+</sect1>

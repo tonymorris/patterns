@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+      <!ENTITY mdash "&#2014;">
+    ]>
+
+<sect1 id="StrategyDesignPattern">
+  <title>Strategy Design Pattern</title>
+  <sect2 id="StrategyDesignPattern.Definition">
+    <title>Definition<biblioref linkend="DesignPatterns.StrategyDesignPattern"/></title>
+    <sect3 id="StrategyDesignPattern.Intent">
+      <title>Intent</title>
+      <para>
+        Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm
+        vary independently from clients that use it.
+      </para>
+    </sect3>
+    <sect3 id="StrategyDesignPattern.Participants">
+      <title>Participants</title>
+      <para>
+        <itemizedlist>
+          <listitem>
+            <para>
+              <code>Strategy</code> declares an interface common to all supported algorithms. <code>Context</code> uses
+              this interface to call the algorithm defined by a <code>ConcreteStrategy</code>.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <code>ConcreteStrategy</code> implements the algorithm using the <code>Strategy</code> interface.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <code>Context</code>
+              <itemizedlist>
+                <listitem>
+                  <para>
+                    is configured with a <code>ConcreteStrategy</code> object.
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    maintains a reference to a <code>Strategy</code> object.
+                  </para>
+                </listitem>
+                <listitem>
+                  <para>
+                    may define an interface that lets <code>Strategy</code> access its data.
+                  </para>
+                </listitem>
+              </itemizedlist>
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+    </sect3>
+  </sect2>
+  <sect2 id="StrategyDesignPattern.Java">
+    <title>Java</title>
+    <para>
+      <programlisting language="Java">
+interface Strategy { void exec(); }
+
+class Context {
+  private Strategy s;
+
+  public Context(Strategy s) { this.s = s; }
+  public void exec() { s.exec(); }
+}
+
+class StrategyA implements Strategy {
+  public void exec() {
+    System.out.println("StrategyA");
+  }
+}
+
+class StrategyB implements Strategy {
+  public void exec() {
+    System.out.println("StrategyB");
+  }
+}
+
+class Main {
+  public static void main(String[] args) {
+    new Context(new StrategyA()).exec();
+    new Context(new StrategyB()).exec();
+  }
+}
+      </programlisting>
+    </para>
+  </sect2>
+  <sect2 id="StrategyDesignPattern.Scala">
+    <title>Scala</title>
+    <para>
+      The <code>Strategy</code> interface is first-class (<code>=> Unit</code>).
+      <programlisting language="Scala">
+class Context(e: => Unit) { def exec = e }
+val strategyA = new Context(println("strategyA"))
+val strategyB = new Context(println("strategyB"))
+def main(args: Array[String]) {
+  strategyA.exec
+  strategyB.exec
+}
+      </programlisting>
+      Wrap the value with <code>new Context</code> then later unwrap the value with <code>exec</code> &mdash; for what
+      gain?
+    </para>
+  </sect2>
+  <sect2 id="StrategyDesignPattern.ScalaStill">
+    <title>Scala (still)</title>
+    <para>
+      We might even parameterise on the unevaluated value. Declare a first-class unevaluated, parameterised value
+      &mdash; call it <code>Thunk</code>.
+      <programlisting language="Scala">
+class Thunk[A](e: => A) { def exec = e }
+val strategyD = new Thunk(println("strategyD"))
+val strategyE = new Thunk(println("strategyE"))
+def main(args: Array[String]) {
+  strategyD.exec
+  strategyE.exec
+}
+      </programlisting>
+    </para>
+  </sect2>
+  <sect2 id="StrategyDesignPattern.ScalaAlreadyHasFirstClassThunk">
+    <title>Scala Already Has First-class Thunk</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Since Scala already has first-class unevaluated values, we just use them when appropriate and the Strategy
+            Design Pattern vanishes since it is of no consequence.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            In Scala, the Strategy Design Pattern reduces to <code>=></code> denoting
+            <emphasis>call-by-name evaluation</emphasis> (without it, Scala defaults to
+            <emphasis>call-by-value evaluation</emphasis>).
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Java has no such mechanism &mdash; strictly <emphasis>call-by-value evaluation</emphasis> &mdash; hence the
+            tendency to Strategy Design Pattern.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="StrategyDesignPattern.WhatAboutHaskell">
+    <title>What about Haskell?</title>
+    <para>
+      <itemizedlist>  
+        <listitem>
+          <para>
+            In Haskell, the Strategy Design Pattern looks like this:       &lt;---- yeah that
+          </para>
+          <para>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="resources/images/smiley-looking-up.gif" format="GIF"/>
+              </imageobject>
+            </mediaobject>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Haskell has <emphasis>call-by-need evaluation</emphasis> by default.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            The Strategy Design Pattern is useful for alleviating deficiencies of inexpressive programming languages
+            lacking first-class unevaluated values (thunks) or it is of no consequence and undeserving of recognition
+            since it reduces to a fundamental tenet of computational theory.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+</sect1>

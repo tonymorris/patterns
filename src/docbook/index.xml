@@ -6,9 +6,16 @@
                "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2001/XInclude'">
 ]>
 
-<article id="DocbookDocument" xmlns:xi="http://www.w3.org/2001/XInclude">
+<article xmlns:xi="http://www.w3.org/2001/XInclude">
   <xi:include href="articleinfo.xml"/>
-  <xi:include href="introduction.xml"/>
-  <xi:include href="PGPKEY.xml"/>
-  <xi:include href="CC-BY-SA.xml"/>
+  <xi:include href="Introduction.xml"/>
+  <xi:include href="Formalities.xml"/>
+  <xi:include href="FashionIndustry.xml"/>
+  <xi:include href="StrategyDesignPattern.xml"/>
+  <xi:include href="VisitorDesignPattern.xml"/>
+  <xi:include href="ReplaceParameterWithMethod.xml"/>
+  <xi:include href="IntroduceNullObject.xml"/>
+  <xi:include href="Discussion.xml"/>
+  <xi:include href="Questions.xml"/>
+  <xi:include href="bibliography.xml"/>
 </article>

@@ -3,8 +3,48 @@
 <!DOCTYPE articleinfo PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
     "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 
-<articleinfo id="DocbookDocumentInfo" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <xi:include href="articleinfo/author/tony.xml"/>
-  <xi:include href="articleinfo/copyright.xml"/>
-  <title id="Title">Docbook Document</title>
+<articleinfo id="ArticleHeader">
+  <abstract id="Abstract">
+    <para>
+      This article is intended as a presentation for Queensland University of Technology (QUT) per request by Richard
+      Thomas (BIT Course Coordinator).
+    </para>
+    <para>
+      Patterns are either indicative of programming language deficiency or are inconsequential and do not deserve
+      elevated status. In this article, I examine two of the Gang-of-Four Design Patterns
+      <biblioref linkend="DesignPatterns"/> and two entries from Martin Fowler's Refactoring
+      <biblioref linkend="Refactoring"/>. These are shown to be of either no significance and worthy of no mention or
+      only applicable in a contrived environment, such as a deficiency in the expressiveness of a programming language.
+    </para>
+    </abstract>
+  <author id="Author">
+    <firstname>Tony</firstname>
+    <surname>Morris</surname>
+    <address>
+      <email>research@workingmouse.com</email>
+      <city>Brisbane</city>
+      <state>Queensland</state>
+      <country>Australia</country>
+    </address>
+  </author>
+  <copyright id="Copyright">
+    <year>2008</year>
+    <holder>
+      Workingmouse Pty. Ltd. All Rights Reserved
+    </holder>
+  </copyright>
+  <revhistory id="RevHistory">
+    <revision>
+      <revnumber>
+        $LastChangedRevision: 1938 $
+      </revnumber>
+      <date>
+        $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+      </date>
+      <revremark>
+        Initial authoring
+      </revremark>
+    </revision>
+  </revhistory>
+  <title id="Title">Patterns: Reduction to the Inconsequential</title>
 </articleinfo>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<sect1 id="ReplaceParameterWithMethod">
+  <title>Replace Parameter With Method</title>
+  <sect2 id="ReplaceParameterWithMethod.Definition">
+    <title>Definition<biblioref linkend="Refactoring.ReplaceParameterWithMethod"/></title>
+    <para>
+      <emphasis>
+        An object invokes a method, then passes the result as a parameter for a method. The receiver can also
+        invoke this method.
+      </emphasis>
+    </para>
+    <para>
+      Remove the parameter and let the receiver invoke the method.
+    </para>
+    <para>
+      <programlisting language="Java">
+int basePrice = _quantity * _itemPrice;
+discountLevel = getDiscountLevel();
+double finalPrice = discountedPrice (basePrice, discountLevel);
+      </programlisting>
+      becomes
+    </para>
+    <para>
+      <programlisting language="Java">
+int basePrice = _quantity * _itemPrice;
+double finalPrice = discountedPrice (basePrice);
+      </programlisting>
+    </para>
+  </sect2>
+  <sect2 id="ReplaceParameterWithMethod.NoCurry">
+    <title>No Curry</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            All Java methods are <emphasis>uncurried</emphasis>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            You supply zero or more arguments to receive a return value.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            All method arguments must be supplied at once, but is there an alternative?
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            A function that takes two arguments of type <code>A</code> and <code>B</code> and returns <code>C</code>
+            might be denoted as <code>(A , B) -> C</code>.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="ReplaceParameterWithMethod.PartialApplication">
+    <title>Partial Application</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Consider a function that is instead denoted <code>A -> (B -> C)</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            The function takes <code>A</code> and returns a function. That returned function takes <code>B</code> and
+            returns <code>C</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            This function is said to be in <emphasis>curried</emphasis> form and it permits
+            <emphasis>partial application</emphasis> of its arguments.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            If you want to switch the order in which arguments are applied, then it is trivial to write a function
+            <code>(A -> (B -> C)) -> (B -> (A -> C))</code> since functions are first-class.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="ReplaceParameterWithMethod.Haskell">
+    <title>Haskell</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Consider the Haskell division function <code>/</code> which is <code>Int -> (Int -> Int)</code><footnote>
+              <para>
+                This is not entirely true since it is actually generalised to the <code>Fractional</code> type-class.
+              </para>
+            </footnote>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            We might pass two arguments to it: <code>(/) 42 7</code> prints <code>6.0</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            We can also use the function in infix position by removing the parentheses: <code>42 / 7</code> prints
+            <code>6.0</code>.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="ReplaceParameterWithMethod.HaskellStill">
+    <title>Haskell (still)</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            But most importantly, we can pass one argument to <code>/</code> and get back a function:
+            <code>let div42 = (/) 42</code> which is <code>Int -> Int</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <code>div42 7</code> prints <code>6.0</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            The <code>flip</code> function is <code>(A -> (B -> C)) -> (B -> (A -> C))</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <code>let (\\) = flip (/)</code> is <code>Int -> Int -> Int</code> but with its arguments
+            <emphasis>flipped</emphasis>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <code>(\\) 7 42</code> prints <code>6.0</code> and <code>7 \\ 42</code> prints <code>6.0</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <code>let vid7 = (\\) 7 in vid7 42</code> prints <code>6.0</code>.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="ReplaceParameterWithMethod.Scala">
+    <title>Scala</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Scala also permits partial application of function arguments.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <code>val div42 = 42 / (_: Int)</code>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Scala requires a type annotation because <code>/</code> is overloaded (it is the Java function after all).
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <code>div42(7)</code> prints <code>6</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            In Scala, not all functions and methods receive transparent first-class status when it comes to partial
+            application (remember, it compiles to standard .class files).
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="ReplaceParameterWithMethod.IsPartialApplication">
+    <title>Do we need Replace Parameter With Method?</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Only if we are using an incompetent programming language that lacks partial application of function arguments.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            In languages with partial application, arguments are simply applied one-by-one without referring to any
+            notions of grandeur.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Replace Parameter With Method is useful for alleviating deficiencies of inexpressive programming languages
+            lacking partial application or it is of no consequence and undeserving of recognition since it reduces to a
+            fundamental tenet of computational theory.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+</sect1>

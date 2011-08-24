@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<sect1 id="IntroduceNullObject">
+  <title>Introduce Null Object</title>
+  <sect2 id="IntroduceNullObject.Definition">
+    <title>Definition<biblioref linkend="Refactoring.IntroduceNullObject"/></title>
+    <para>
+      <emphasis>
+        You have repeated checks for a null value.
+      </emphasis>
+    </para>
+    <para>
+      Replace the null value with a null object.
+    </para>
+    <para>
+      <programlisting language="Java">
+if (customer == null) plan = BillingPlan.basic();
+else plan = customer.getPlan();
+      </programlisting>
+    </para>
+  </sect2>
+  <sect2 id="IntroduceNullObject.OneOrNone">
+    <title>Remember OneOrNone?</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Remember <code>OneOrNone</code> &mdash; the list that could hold 0 or 1 element?
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            This can replace <code>null</code> completely and is essentially a parameterised null object.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Even in Java!<footnote>
+              <para>
+                See <code>fj.data.Option</code> from the <ulink url="http://functionaljava.org">Functional Java</ulink>
+                project.
+              </para>
+            </footnote>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            So what? Are we any better off?
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="IntroduceNullObject.YouBetchya">
+    <title>You Betchya</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            First let's correct the aforementioned (bad) example
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <code>plan = customer == null ? BillingPlan.basic() : customer.getPlan();</code>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <table frame="all">
+              <title>Representations of zero or one element lists</title>
+              <tgroup cols="3">
+                <thead>
+                  <row>
+                    <entry>Our Example</entry>
+                    <entry>Scala</entry>
+                    <entry>Haskell</entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry>
+                      <code>OneOrNone</code>
+                    </entry>
+                    <entry>
+                      <code>Option</code>
+                    </entry>
+                    <entry>
+                      <code>Maybe</code>
+                    </entry>
+                  </row>
+                  <row>
+                    <entry>
+                      <code>One</code>
+                    </entry>
+                    <entry>
+                      <code>Some</code>
+                    </entry>
+                    <entry>
+                      <code>Just</code>
+                    </entry>
+                  </row>
+                  <row>
+                    <entry>
+                      <code>None</code>
+                    </entry>
+                    <entry>
+                      <code>None</code>
+                    </entry>
+                    <entry>
+                      <code>Nothing</code>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            These representations are effectively a first-class <code>null</code> over which we can write functions.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="IntroduceNullObject.GetOrElse">
+    <title>Get or Else</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Introduce Null Object reduces to a function <code>OneOrNone&lt;T> -> T -> T</code> (getOrElse?).
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Return the <code>One</code> if it is available, otherwise the other given argument.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Note that the second argument should be denoted as lazy since it may never evaluate.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Show me the money!
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="IntroduceNullObject.CSharp">
+    <title>C# has it</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            C# 3.0 has this built into the language.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            The <emphasis>null coalescing operator</emphasis> <code>??</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <programlisting language="C#">
+string message = "hello";
+string result = message ?? "default value";              
+            </programlisting>
+            <code>result</code> will be <code>"hello"</code>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <programlisting language="C#">
+string message = null;
+string result = message ?? "default value";
+            </programlisting>
+            <code>result</code> will be <code>"default value"</code>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="IntroduceNullObject.Scala">
+    <title>Scala</title>
+    <para>
+      <programlisting language="Scala">
+// like a Java interface
+trait Customer { def getPlan: String }
+
+// like a Java class with a static method
+object BillingPlan { def basic: String = "basic" }
+      </programlisting>
+    </para>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Using Introduce Null Object we would write
+            <code>def f(c: Customer) = val plan = if(c == null) BillingPlan.basic else c.getPlan ...</code>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Using Scala's <code>Option</code> we would alter the type to <code>Option[Customer]</code> and use
+            <emphasis>higher-order functions</emphasis>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <code>def g(c: Option[Customer]) = val plan = c map (_.getPlan) getOrElse BillingPlan.basic ...</code>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Does it stop there?
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="IntroduceNullObject.Nup">
+    <title>Nup</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            There are many useful functions that can be written over a first-class <code>null</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Consider repeated <emphasis role="bold">embedded</emphasis> <code>null</code> checks:
+              <programlisting language="Java">
+if(a == null)
+  return null;
+else {
+  b = f(a);
+  if(b == null)
+    return null;
+  else {
+    c = g(a, b);
+    if(c == null)
+      return null;
+    else ...
+  }
+}
+              </programlisting>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="IntroduceNullObject.FlattenThenMap">
+    <title>Flatten Then Map</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Scala can better write this function using <code>flatMap</code> which is
+            <code>Option&lt;T> -> (T -> Option&lt;U>) -> Option&lt;U></code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            This is called the <emphasis>monadic model of computation</emphasis> through a 0-or-1 element list.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <code>a flatMap b flatMap c flatMap ...</code>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Zing!
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="IntroduceNullObject.Haskell">
+    <title>Haskell</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            The Haskell standard library has <code>fromMaybe</code> equivalent to Scala's <code>getOrElse</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            The Haskell standard library has <code>>>=</code> which is a generalised version of Scala's
+            <code>flatMap</code> pronounced <emphasis>bind</emphasis>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Introduce Null Object is a degenerate representation that is used when first-class functions and Algebraic
+            Data Types are unavailable. Even when these are unavailable a less contrived possibility exists, however,
+            this requires a significant diversion from canonical use of mainstream programming languages.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+</sect1>

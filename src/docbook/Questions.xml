@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<sect1 id="Questions">
+  <title>Questions</title>
+  <para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Any curious mind will have questions <emphasis role="bold">in the future</emphasis>.
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="resources/images/exit.gif" format="GIF"/>
+            </imageobject>
+          </mediaobject>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          If you do, please do not hesitate to email them to me
+          <ulink url="mailto:research@workingmouse.com">research@workingmouse.com</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          These slides can be found at
+          <ulink url="http://projects.workingmouse.com/public/Patterns/artifacts/">http://projects.workingmouse.com/public/Patterns/artifacts/</ulink>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </para>
+</sect1>
