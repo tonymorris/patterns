@@ -1,7 +1,7 @@
-Docbook Document
-================
+Patterns: Reduction to the Inconsequential
+==========================================
 
-A template from which to create a Docbook document.
+Slides for a presentation on Design Patterns.
 
 Setting up
 ==========

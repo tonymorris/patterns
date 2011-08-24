@@ -5,5 +5,5 @@ import Build.Document
 c :: 
   Config
 c = 
-  defaultConfig "docbook-document" "Docbook Document"
+  defaultConfig "patterns" "Patterns: Reduction to the Inconsequential"
 
