@@ -1,113 +1,97 @@
-div.navheader table {
-  background-color:#eee;
-}
-div.navheader th  {
-  font-family:georgia, Verdana, Arial, serif;
-  font-weight:bold;
-}
-div.navheader td  {
-  font-family:georgia, Verdana, Arial, serif;
-  font-weight:normal;
-}
-div.navfooter table {
-  background-color:#eee;
-}
-div.navfooter th  {
-  font-family:georgia, Verdana, Arial, serif;
-  font-weight:bold;
-}
-div.navfooter td  {
-  font-family:georgia, Verdana, Arial, serif;
-  font-weight:normal;
-}
-div.revhistory table, div.revhistory tr, div.revhistory td, div.revhistory th {
-  font-size:18px;
-}
-div.table-contents table {
-  padding: 5px;
-}
-div.blockquote table {
-  border: 0;
-}
-table {
-  border: 1px solid #ccc;
-}
-tr, td, th {
-  font-size:24px;
-  border: 0;
-}
+/*
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+*/
+
 body {
-  color: #000;
-  font-size:24px;
-  line-height:35px;
-  font-family:'Lucida Grande', Verdana, Arial, sans-serif;
-  background-color:#fff;
-  margin: 15px;
-}
-h1 {
-  font-size:60px;
-  line-height:60px;
-  font-family:georgia, Verdana, Arial, serif;
-  margin-bottom:15px;
-  font-weight:normal;
-}
-h2 {
-  font-size:60px;
-  line-height:70px;
-  margin-bottom:15px;
-  font-family:georgia, Verdana, Arial, serif;
-  color:black;
-}
-h3 {
-  font-size:40px;
-  line-height:40px;
-  margin-bottom:15px;
-  font-family:georgia, Verdana, Arial, serif;
-  color:black;
-}
-p {
-  margin-bottom:25px;
-}
-a:hover {
-  text-decoration:none;
-}
-em {
-  font-style:normal;
-  font-weight:bold;
-}
-ul {
-  list-style-type:disc;
-  margin:25px 25px;
-}
-img.right {
-  float: right;
-  margin:10px;
-}
-img.left {
-  float: left;
-  margin:10px;
-}
-img.center {
-  margin:10px auto 25px auto;
-  display:block;
-}
-pre.programlisting{
-  color:white;
-  /*background-color:#522812;*/
-  background-color:#000;
-  font-family:Monaco, Consolas, "Courier New", monospace;
-  font-size:24px;
-  line-height:28px;
-  padding:5px 10px;
-  margin-bottom:25px;
-  background-repeat:no-repeat;
-  background-position:top right;
-}
-.code {
-  white-space:nowrap;
-  font-family:Monaco, Consolas, "Courier New", monospace;
-  background-color:#ddd;
-  font-weight:normal;
-  padding: 2px;
+  font-family: "Lucida Grande", Arial, Verdana, sans-serif;
 }
 
+h1 {
+  font-size: xx-large;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: underline;
+}
+
+h2 {
+  font-size: x-large;
+  font-weight: normal;
+  text-align: center;
+  text-decoration: none;
+}
+
+h3 {
+  font-size: large;
+  font-weight: normal;
+  text-align: left;
+  text-decoration: none;
+}
+
+h4 {
+  font-size: medium;
+  font-weight: bold;
+  text-align: left;
+  text-decoration: none;
+}
+
+img {
+  border: 0;
+}
+
+li {
+  margin-left: 100px
+}
+
+a {
+  color: #336666;
+  font-style: normal;
+  text-decoration: none;
+}
+
+.author {
+  text-align: center;
+}
+
+.code {
+  background-color: #F5F5F5;
+}
+
+.copyright {
+  font-size: small;
+  text-align: center;
+}
+
+.navheader {
+  background-color: #AADDDD;
+}
+
+.navfooter {
+  background-color: #AADDDD;
+}
+
+.programlisting {
+  background-color: #F5F5F5;
+}
+
+.revhistory table {
+  background-color: #F4FFFF;
+  color: #AAAAAA;
+  font-size: xx-small;
+}
+
+.revhistory td {
+  border-width: 0;
+}
+
+.revhistory th {
+  border-width: 0;
+}
+
+.subtitle {
+  text-align: center;
+}
+
+.toc {
+  margin-left: 150px
+}
