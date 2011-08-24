@@ -1,17 +1,29 @@
-personal_ws-1.1 en 28 
+personal_ws-1.1 en 42 
 organization
+getOrElse
+Nup
+ADTs
 waivable
 AUTHORIZED
 synching
 Ssection
+Scala's
+parameterise
+parameterised
 phonogram
 sublicense
+IQs
 Docbook
+uncurried
+Scala
 recognizably
+Betchya
 Licence
 ShareAlike
 TODO
 pre
+Refactoring
+QUT
 NONINFRINGEMENT
 utilizing
 Unported
@@ -22,8 +34,10 @@ dramatico
 MERCHANTIBILITY
 CCPL
 relicensing
+OneOrNone
 WIPO
 synchronization
+destructuring
 Licensor
 Berne
 phonograms
