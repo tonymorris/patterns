@@ -3,6 +3,16 @@ Patterns: Reduction to the Inconsequential
 
 Slides for a presentation on Design Patterns.
 
+To get started, perform the following:
+
+* Rename docbook-document.iml to yourproject.iml
+* Edit .idea/modules.xml and change to yourproject.iml
+* Edit bin/pdfx and change to yourproject
+* Edit bin/allx and change to yourproject
+* Edit .ghci and change to yourproject
+* Edit Build.hs and change to yourproject
+* Edit README.markdown for notes specific to your project.
+
 Setting up
 ==========
 
